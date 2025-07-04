@@ -1,0 +1,34 @@
+ let file = String.fromCharCode('a'.charCodeAt(0) + i);
+
+        // 8th rank (index 0)
+        let sq8 = document.getElementById(file + "8");
+        if (chess_unicode_html_decimal[ranks[0][i]]) {
+            sq8.innerHTML = chess_unicode_html_decimal[ranks[0][i]];
+        } else {
+            sq8.innerHTML = "";
+        }
+
+        // 7th rank (index 1)
+        let sq7 = document.getElementById(file + "7");
+        if (chess_unicode_html_decimal[ranks[1][i]]) {
+            sq7.innerHTML = chess_unicode_html_decimal[ranks[1][i]];
+        } else {
+            sq7.innerHTML = "";
+        }
+
+        // 2nd rank (index 6)
+        let sq2 = document.getElementById(file + "2");
+        if (chess_unicode_html_decimal[ranks[6][i]]) {
+            sq2.innerHTML = chess_unicode_html_decimal[ranks[6][i]];
+        } else {
+            sq2.innerHTML = "";
+        }
+
+        // 1st rank (index 7)
+        let sq1 = document.getElementById(file + "1");
+        if (chess_unicode_html_decimal[ranks[7][i]]) {
+            sq1.innerHTML = chess_unicode_html_decimal[ranks[7][i]];
+        } else {
+            sq1.innerHTML = "";
+        }
+    }

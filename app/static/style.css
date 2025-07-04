@@ -1,0 +1,335 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+
+}
+
+body{
+    position: relative;
+    caret-color: #cbf078;
+    /* background-color: #757171; */
+    background-image: url('./galaxy_gpt.png');
+    /* no-repeat center center fixed */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    /* background-repeat: no-repeat; */ 
+}
+
+/* .board{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    max-width: 95vw;
+    max-height: 95vh;
+    overflow: auto;
+} */
+.board{
+
+    width: 100%;
+    max-width: 480px; 
+    box-sizing: border-box; 
+    display: block;
+    border: 4px solid #338ce0;
+    margin: 10px auto;
+    /* cursor: grabbing; */
+   
+} 
+
+/* #chess-board{
+    filter: blur(8px);
+    transition: filter 0.3s ease-in-out;
+} */
+
+.row{
+    display: flex;
+}
+
+.square{
+    height: 60px;
+    width: 60px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.black{
+    background-color: #5083B2;
+}
+
+.white{
+    background-color: #F0F1F0;
+}
+
+.piece{
+    font-size: 45px;
+    margin: auto;
+    cursor: grab;
+}
+
+/* .piece:active,
+.piece:focus,
+.piece:dragging{
+    cursor: grabbing;
+} */
+
+
+.highlight-square{
+    width: 18px;
+    height: 18px;
+    background: rgba(30, 30, 30, 0.4);
+    background: #7296AB;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* So it doesn't block piece drops */
+    z-index: 2;
+}
+
+.highlight-square-occupied{
+    background: "transparent";
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* So it doesn't block piece drops */
+    z-index: 2;
+    border: 3px solid #7296AB;
+}
+
+.game-over{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: antiquewhite;
+    width: 50%;
+    height: 40%;
+    
+}
+
+/* .white-piece{
+    color: black;
+} */
+.buttons{
+    /* width: 30%;
+    height: 50%; */
+    /* background-color: #f0f1f0; */
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: space-around;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.blurred {
+    filter: blur(8px);
+
+    transition: filter 0.3s ease-in-out;
+}
+
+.buttons-z-idx{
+    z-index: 10;
+}
+
+
+
+.btn{
+    background-color: #338ce0;
+    color: whitesmoke;
+    border-radius: 12px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #1a5f8c;
+}
+
+#btn-white-player, #btn-black-player, #play-again{
+
+    background-color: #5083B2;
+}
+
+#btn-white-player:hover, #btn-black-player:hover, #play-again:hover{
+    background-color: #78b3eb;
+}
+
+.popup,.game-result{
+    display: none;
+    width: 30%;
+    height: 40%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: #262421; */
+    background-color: #1A5F8C;
+    color: #fff;
+    /* display: flex;
+    flex-direction: column; */
+    overflow: auto;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1000;
+    opacity: 0.8;
+}
+
+/* .game-result{
+    height: 60%;
+    overflow: hidden; 
+    opacity: 1;
+} */
+
+.game-result {
+    height: 60%;
+    opacity: 1;
+    overflow: hidden; /* Prevent scrollbars */
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.popup-content ,.result-content{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    
+}
+
+#close-popup,#close-result{
+    color: whitesmoke;
+    cursor: pointer;
+    position: absolute;
+    left: 92%;
+    top: 2%;
+    font-size: 1.5rem;
+    /* transition: color 0.3s ease-in-out; */
+}
+
+#close-popup:hover, #close-result:hover{
+    color: #a53104;
+    transform: scale(1.5);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;;
+}
+
+.meme-img-container {
+    width: 100%;
+    max-width: 500px;
+    height: 250px;           /* Set a fixed height for the container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+    /* background: #fff;        Optional: background for contrast */
+    border-radius: 8px;
+    overflow: hidden;        /* Ensures image doesn't overflow */
+
+}
+
+#meme-img-id{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;     /* Ensures the whole image fits inside */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.board-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 10px;
+    
+    /* border: 2px solid #338ce0;; */
+    width: fit-content;
+    margin: 20px auto 0 auto;
+}
+
+.profile{
+    width: 100%;
+    max-width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #78b3eb;
+    border-radius: 8px;
+    padding: 3px;
+    opacity: 0.7;
+}
+
+.img-container{
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+   
+}
+
+.img-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid #78b3eb;
+    margin-left: 4px;
+}
+
+.profile div{
+    font-size: larger;
+    font-weight: 600;
+    color: #000;
+}
+
+#engine-id{
+    /* position: absolute;
+   
+    left: 0;
+    bottom: 0; */
+    /* margin: 4px auto; */
+    display: none;
+    align-self: flex-start;
+}
+
+#user-id{
+    /* position: absolute;
+    left: 0;
+    top: 0; */
+    /* margin:  2px auto; */
+    display: none;
+    align-self: flex-start;
+}
+
+
+/* .meme-img-container{
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+} */
+

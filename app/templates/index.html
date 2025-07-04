@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHESS ENGINE</title>
+     <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='strategy.png')}}" >
+    <link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='style.css')}}">
+    <!-- <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script> -->
+</head>
+<body>
+    <div class="buttons">
+         <!-- <button id="self-play">Self Play(AI VS AI)</button>
+        <button id="play-against-stockfish">Play Against Stockfish(AI VS SF)</button> -->
+        <button class="btn" id="p-a-s-f">AI VS SF</button>
+        <button class="btn" id="play-against-engine">Play Against AI</button>
+        <button class="btn" id="play-against-friend">Play Against Friend</button>
+    </div>
+
+    <div class="popup" id="my-popup">
+        <div class="popup-content">
+            <span class="close" id="close-popup">&times;</span>
+            <h1>Play As</h1>
+            <button class="btn" id="btn-white-player"><img src="{{url_for('static', filename='Chess_kltWHITE.png')}}" alt="white-king"></button>
+            <button class="btn" id="btn-black-player"><img src="{{url_for('static', filename='Chess_kdBLACK.png')}}" alt="black-king"></button>
+        </div>
+    </div>
+
+    <div class="game-result" id="my-game-result">
+        <div class="result-content">
+            <span class="close" id="close-result">&times;</span>
+            <h1>Game Over</h1>
+            <p id="result-text">You Win!</p>
+            <button class="btn btn-play-again" id="play-again">Play Again</button>
+            <div class="meme-img-container">
+                <img src="{{url_for('static', filename='chess_meme/chess_meme_105.jpeg')}}" alt="chess-meme" id ="meme-img-id">
+            </div>
+        </div>
+    </div>
+ 
+<div class="board-container">
+<div class="profile" id="user-id">
+    <div class="img-container">
+        <img src="{{url_for('static', filename='user_profile.jpg')}}" alt="user-prof" id="user-image">
+    </div>
+    <div class="user-name" id="user-prof-id">Player</div>
+</div>
+<div class="board" id="chess-board" onload="initial_board_setup()">
+    {% for i in range(8) %}
+        <div class="row row_{{i}}">
+        {% for j in range(8) %}
+            {% set clsname = 'white' if (i + j) % 2 == 0 else 'black' %}
+            {% set file = files[j] %}
+            {% set rank = 8 - i %}
+            <div class="square {{clsname}}" id="{{file}}{{rank}}" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"></div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+<div class="profile" id="engine-id">
+     <div class="img-container">
+        <img src="{{url_for('static', filename='chess_eng_img.png')}}" alt="engine-prof" id="engine-image">
+    </div>
+    <div class="engine-name" id="engine-prof-id">KDB-17</div>
+</div>
+
+</div>    
+
+
+<script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
+</body>
+</html>
+
