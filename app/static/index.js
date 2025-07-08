@@ -76,16 +76,16 @@ async function dragstartHandler(event){
 
 
     try {
-        const response = await fetch('/legal_moves');
-        const val = await response.json();
-        console.log(val);
-        legal_moves = val['legal_moves'];
-        const side = val['side_to_move'];
-        GLOBAL_FEN = val['fen'];
-        console.log(legal_moves);
-        console.log(side);
+        const response = await fetch('/legal_moves')
+        const val = await response.json()
+        console.log(val)
+        legal_moves = val['legal_moves']
+        const side = val['side_to_move']
+        GLOBAL_FEN = val['fen']
+        console.log(legal_moves)
+        console.log(side)
     } catch (error) {
-        console.error('Error fetching legal moves:', error);
+        console.error('Error fetching legal moves:', error)
     }
 
     console.log("DRAG STARTED")
@@ -368,7 +368,9 @@ async function dropHandler(event) {
         dropSquare.appendChild(draggedPiece);
 
         const resultText = draggedPiece.classList.contains("white-piece") ? "White won" : "Black won"
-        displayResultWindow(resultText)
+        setTimeout(() => {
+            displayResultWindow(resultText)
+        }, 500)
 
         return
     }
@@ -411,7 +413,9 @@ async function dropHandler(event) {
             playAudio('static/audio/game-end.mp3')
 
             const resultText = draggedPiece.classList.contains("white-piece") ? "White won" : "Black won"
-            displayResultWindow(resultText)
+            setTimeout(() =>{
+                displayResultWindow(resultText)
+            },500)
 
             return
         }
@@ -457,7 +461,9 @@ async function dropHandler(event) {
 
             // Display game result
             const resultText = draggedPiece.classList.contains("white-piece") ? "White won" : "Black won"
-            displayResultWindow(resultText)
+            setTimeout(() =>{
+                displayResultWindow(resultText)
+            },500)
 
             return
         }
@@ -692,7 +698,9 @@ function makeMove(move, fen, isCheck, isCheckmate) {
 
         // Display game result
         const resultText = fromIsWhite ? "White won" : "Black won"
-        displayResultWindow(resultText)
+        setTimeout(() =>{
+                displayResultWindow(resultText)
+        },500)
         return;
     }
 
